@@ -38,33 +38,16 @@ public class EventControllerTest {
 
     @Test
     public void test_getAllEvents() {
-        given()
-            .get("/events")
-        .then()
-            .statusCode(200)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("name", hasItems(INFORMATICA, MECCHANICA))
-            .body("id", hasItems(3, 4))
-            .body("startDate", hasItems(START_INFORMATICA, START_MECCHANICA))
-            .body("endDate", hasItems(END_INFORMATICA, END_MECCHANICA))
-
-            // Moeglichkeit 1
-            .body("find { event -> event.id == 3 }.id", equalTo(3))
-            .body("find { event -> event.id == 3 }.name", equalTo(INFORMATICA))
-            .body("find { event -> event.id == 3 }.startDate", equalTo(START_INFORMATICA))
-            .body("find { event -> event.id == 3 }.endDate", equalTo(END_INFORMATICA))
-
-            // Moeglichkeit 2
-            .root("find { event -> event.id == 3 }")
-            .body("id", equalTo(3))
-            .body("name", equalTo(INFORMATICA))
-            .body("startDate", equalTo(START_INFORMATICA))
-            .body("endDate", equalTo(END_INFORMATICA))
-            .root("find { event -> event.id == 4 }")
-            .body("id", equalTo(4))
-            .body("name", equalTo(MECCHANICA))
-            .body("startDate", equalTo(START_MECCHANICA))
-            .body("endDate", equalTo(END_MECCHANICA))
+    	 given().log().all()
+    	     .get("/events")
+    	     
+    	 .then().log().all()
+    	    .statusCode(200)
+    	    .contentType(MediaType.APPLICATION_JSON_VALUE)
+    	    .body("name", hasItems(INFORMATICA, MECCHANICA))
+    	    .body("id", hasItems(3, 4))
+    	    .body("startDate", hasItems(START_INFORMATICA, START_MECCHANICA))
+    	    .body("endDate", hasItems(END_INFORMATICA, END_MECCHANICA));
             ;
     }
 
